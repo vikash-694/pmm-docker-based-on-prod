@@ -22,4 +22,4 @@ for index in "${!accounts[@]}"; do
   fi
 done
 
-echo "[INFO] RDS discovery
+echo "[INFO] RDS discovery completed for all accounts."
