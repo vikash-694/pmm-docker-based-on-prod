@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /root/pmm-docker-based-on-prod/ || exit 1
+cd /root/pmm-docker-based-on-prod/scripts || exit 1
 
 export AWS_ACCOUNTS="364871072205"
 export AWS_ROLE_ARNS="arn:aws:iam::364871072205:role/PMM-RDS-Monitoring-Role"
