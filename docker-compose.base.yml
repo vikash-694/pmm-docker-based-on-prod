@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+  pmm-server:
+    image: percona/pmm-server:${PMM_TAG}
+    container_name: ${PMM_CONTAINER_NAME}
+    restart: always
+    env_file:
+      - aws-creds/aws.env
+    ports:
+      - "${PMM_HTTP_PORT}:80"
+      - "${PMM_HTTPS_PORT}:8443"
+    environment:
+      - PMM_WATCHTOWER_HOST=http://watchtower:${WATCHTOWER_PORT}
+      - PMM_WATCHTOWER_TOKEN=${WATCHTOWER_TOKEN}
+    volumes:
+      - ${PMM_VOLUME_NAME}:/srv
+    networks:
+      - pmm-net
+
+  watchtower:
+    image: percona/watchtower:${WATCHTOWER_TAG}
+    container_name: ${WATCHTOWER_CONTAINER_NAME}
+    restart: always
+    ports:
+      - "${WATCHTOWER_PORT}:${WATCHTOWER_PORT}"
+    environment:
+      - WATCHTOWER_HTTP_API=true
+      - WATCHTOWER_HTTP_API_TOKEN=${WATCHTOWER_TOKEN}
+    command: >
+      --http-api-update
+      --http-api-token=${WATCHTOWER_TOKEN}
+      --http-api-metrics
+      --cleanup
+      --include-restarting
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - pmm-net
+
+networks:
+  pmm-net:
+    external: true
+    name: pmm-docker-prod_pmm-net

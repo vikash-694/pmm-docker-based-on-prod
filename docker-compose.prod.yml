@@ -1,0 +1,8 @@
+services:
+  pmm-server:
+    volumes:
+      - ${PMM_VOLUME_NAME}:/srv
+
+volumes:
+  pmm-prod-data:
+    external: true
