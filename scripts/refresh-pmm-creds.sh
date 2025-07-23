@@ -20,7 +20,7 @@ for ROLE_ARN in "${ROLES[@]}"; do
   echo "[INFO] Assuming Role: $ROLE_ARN"
 
   ACCOUNT_ID=$(echo "$ROLE_ARN" | cut -d':' -f5)
-  
+
   ASSUME_ROLE_OUTPUT=$(aws sts assume-role \
     --role-arn "$ROLE_ARN" \
     --role-session-name "pmm-session-${ACCOUNT_ID}")
