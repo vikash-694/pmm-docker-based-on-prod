@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source "$(cd "$(dirname "$0")" && pwd)/pmm-assume-multi-roles.sh"
+ROLE_INDEX=${1:-}  # optional role index
 
-echo "[INFO] Discovering EC2 database servers (tagged)..."
+source "$(cd "$(dirname "$0")" && pwd)/pmm-assume-multi-roles.sh" "$ROLE_INDEX"
+
+echo "[INFO] Discovering EC2 database servers (role index: ${ROLE_INDEX:-default})..."
 
 aws ec2 describe-instances \
   --filters "Name=tag:Module,Values=db" \

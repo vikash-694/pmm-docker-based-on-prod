@@ -2,7 +2,7 @@
 set -e
 
 # Configurable: List of Role ARNs (comma-separated)
-AWS_ROLE_ARNS="arn:aws:iam::364871072205:role/PMM-RDS-Monitoring-Role"
+AWS_ROLE_ARNS="arn:aws:iam::364871072205:role/PMM-RDS-Monitoring-Role,arn:aws:iam::559050238585:role/PMM-RDS-Monitoring-Role,arn:aws:iam::957627119795:role/PMM-EC2-RDS-Monitoring-Role"
 
 # Output path (repo root aws-creds)
 CRED_DIR="$(cd "$(dirname "$0")/.." && pwd)/aws-creds"
